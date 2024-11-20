@@ -14,4 +14,4 @@ export type ColorPickerState = {
   isColorPickerVisible: boolean;
 };
 
-export { RGBColor };
+export type { RGBColor };

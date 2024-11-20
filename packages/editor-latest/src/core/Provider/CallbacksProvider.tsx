@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren } from 'react';
-import React, { useRef } from 'react';
-import deepEquals from '../utils/deepEquals';
+import { useRef } from 'react';
 import { CallbacksContext } from '../components/hooks';
+import deepEquals from '../utils/deepEquals';
 
 import type { Callbacks } from '../types';
 

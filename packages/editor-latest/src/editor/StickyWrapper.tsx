@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useOption } from '..';
+import { useOption } from '../core/components/hooks';
 
 type StickyProps = {
   rightOffset: number;

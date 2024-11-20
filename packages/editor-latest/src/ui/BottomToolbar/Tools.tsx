@@ -8,7 +8,7 @@ import { I18nTools } from '../I18nTools';
 import { SelectParentButton } from '../SelectParentButton';
 import { BottomToolbarToolsProps } from './types';
 
-export { BottomToolbarToolsProps };
+export type { BottomToolbarToolsProps };
 export const BottomToolbarTools: React.FC<BottomToolbarToolsProps> = React.memo(
   ({ nodeId }) => {
     const { t } = useUiTranslator();

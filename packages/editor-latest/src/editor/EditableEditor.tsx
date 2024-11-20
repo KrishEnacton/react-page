@@ -1,6 +1,5 @@
 import type { BackendFactory } from 'dnd-core';
 import type { FC, PropsWithChildren } from 'react';
-import React from 'react';
 import Editable from '../core/components/Editable';
 import GlobalHotKeys from '../core/components/HotKey/GlobalHotKeys';
 import { createEmptyState } from '../core/EditorStore';

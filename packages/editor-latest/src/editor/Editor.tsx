@@ -1,6 +1,5 @@
 import type { FC, PropsWithChildren } from 'react';
-import React, { useEffect, useState } from 'react';
-import lazyLoad from '../core/helper/lazyLoad';
+import { Suspense, useEffect, useState } from 'react';
 import type {
   Callbacks,
   Options,
@@ -8,8 +7,8 @@ import type {
   ValueWithLegacy,
 } from '../core/types';
 import { HTMLRenderer } from '../renderer/HTMLRenderer';
-
-const EditableEditor = lazyLoad(() => import('./EditableEditor'));
+import EditableEditor from './EditableEditor';
+import 'react/jsx-runtime';
 
 export type EditorProps = {
   /**
@@ -70,7 +69,7 @@ const Editor: FC<PropsWithChildren<EditorProps>> = ({
       cellSpacing={cellSpacing}
     />
   ) : (
-    <EditableEditor
+    <Suspense
       fallback={
         <HTMLRenderer
           value={value}
@@ -79,13 +78,16 @@ const Editor: FC<PropsWithChildren<EditorProps>> = ({
           cellSpacing={cellSpacing}
         />
       }
-      value={value}
-      lang={lang}
-      options={options}
-      renderOptions={renderOptions}
-      callbacks={callbacks}
-      children={children}
-    />
+    >
+      <EditableEditor
+        value={value}
+        lang={lang}
+        options={options}
+        renderOptions={renderOptions}
+        callbacks={callbacks}
+        children={children}
+      />
+    </Suspense>
   );
 };
 

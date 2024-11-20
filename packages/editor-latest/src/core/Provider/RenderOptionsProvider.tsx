@@ -1,9 +1,9 @@
 import type { FC, PropsWithChildren } from 'react';
-import React, { useRef } from 'react';
-import deepEquals from '../utils/deepEquals';
+import { useRef } from 'react';
 import { RenderOptionsContext } from '../components/hooks';
-import type { RenderOptions } from '../types';
 import { DEFAULT_RENDER_OPTIONS } from '../defaultOptions';
+import type { RenderOptions } from '../types';
+import deepEquals from '../utils/deepEquals';
 /*
 we memoize the RenderOptions, so that if you access them, you won't get a fresh object every time.
 

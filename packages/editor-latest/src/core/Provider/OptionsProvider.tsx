@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren } from 'react';
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import deepEquals from '../utils/deepEquals';
 import { OptionsContext } from '../components/hooks';
 import { DEFAULT_OPTIONS } from '../defaultOptions';

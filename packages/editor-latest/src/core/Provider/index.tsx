@@ -1,6 +1,5 @@
+import { ThemeProvider } from '@mui/material';
 import type { FC, PropsWithChildren } from 'react';
-import React from 'react';
-import DndProvider from './DndProvider';
 import BlurGate from '../components/BlurGate';
 import type {
   Callbacks,
@@ -9,10 +8,10 @@ import type {
   ValueWithLegacy,
 } from '../types';
 import CallbacksProvider from './CallbacksProvider';
+import DndProvider from './DndProvider';
 import EditorStoreProvider from './EditorStoreProvider';
 import OptionsProvider from './OptionsProvider';
 import RenderOptionsProvider from './RenderOptionsProvider';
-import { ThemeProvider } from '@mui/material';
 
 import { DEFAULT_OPTIONS } from '../defaultOptions';
 

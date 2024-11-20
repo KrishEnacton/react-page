@@ -1,8 +1,6 @@
-import React, { Fragment, useEffect, useMemo } from 'react';
+import { Fragment, lazy, Suspense, useEffect, useMemo } from 'react';
 import type JSONSchemaBridge from 'uniforms-bridge-json-schema';
 import { useIsSmallScreen } from '../../core/components/hooks';
-import lazyLoad from '../../core/helper/lazyLoad';
-
 import type {
   AutoformControlsDef,
   CellPluginComponentProps,
@@ -11,13 +9,14 @@ import type {
 } from '../../core/types';
 import makeUniformsSchema from './makeUniformsSchema';
 
-export const AutoForm = lazyLoad(() => import('./AutoForm'));
-export const AutoField = lazyLoad(() => import('./AutoField'));
-export const AutoFields = lazyLoad(() => import('./AutoFields'));
+export const AutoForm = lazy(() => import('./AutoForm'));
+export const AutoField = lazy(() => import('./AutoField'));
+export const AutoFields = lazy(() => import('./AutoFields'));
 
 const getDefaultValue = function (bridge: JSONSchemaBridge): {
   [key: string]: unknown;
 } {
+  // @ts-ignore
   return bridge.getSubfields().reduce(
     (acc, fieldName) => ({
       ...acc,
@@ -45,26 +44,30 @@ export function AutoformControls<T extends DataTType>(props: Props<T>) {
   const isSmall = useIsSmallScreen();
 
   return (
-    <AutoForm
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      model={data as any}
-      autosave={true}
-      schema={bridge}
-      onSubmit={onChange}
-    >
-      {Content ? (
-        <Content {...props} columnCount={columnCount} />
-      ) : (
-        <div
-          style={{
-            columnCount: isSmall ? 1 : columnCount,
-            columnRule: '1px solid #E0E0E0',
-            columnGap: 48,
-          }}
-        >
-          <AutoFields element={Fragment} />
-        </div>
-      )}
-    </AutoForm>
+    <Suspense>
+      <AutoForm
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        model={data as any}
+        autosave={true}
+        schema={bridge}
+        onSubmit={onChange}
+      >
+        {Content ? (
+          <Content {...props} columnCount={columnCount} />
+        ) : (
+          <div
+            style={{
+              columnCount: isSmall ? 1 : columnCount,
+              columnRule: '1px solid #E0E0E0',
+              columnGap: 48,
+            }}
+          >
+            <Suspense>
+              <AutoFields element={Fragment} />
+            </Suspense>
+          </div>
+        )}
+      </AutoForm>
+    </Suspense>
   );
 }

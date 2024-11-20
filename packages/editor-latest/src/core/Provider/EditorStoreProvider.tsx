@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren } from 'react';
-import React, { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { updateValue } from '../actions/value';
 import {
   useCallbackOption,
